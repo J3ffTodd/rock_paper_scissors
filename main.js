@@ -1,42 +1,41 @@
 const choices = ["rock","paper","scissors"];
 const winners = [];
 
-function game() {
-    for (let i = 1; i <= 5; i++) {
-    playRound(i);
- }
-  logWins();
-}
+// function game() {
+//  for (let i = 1; i <= 5; i++)
+//    {
+//   playRound(i);
+//  }
+//  logWins();
+// }
 
-function playRound(round) {
-    const playerSelection = playerChoice()
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+
+rockButton.addEventListener("click", () => {
     const computerSelection = computerChoice()
-    const winner = checkWinner(playerSelection, computerSelection);
+    let playerSelection = "rock"
+    playRound("rock",computerSelection)
+});
+
+paperButton.addEventListener("click", () => {
+    const computerSelection = computerChoice()
+    let playerSelection = "paper"
+    playRound("paper",computerSelection)
+});
+
+scissorsButton.addEventListener("click", () => {
+    const computerSelection = computerChoice()
+    let playerSelection = "scissors"
+    playRound("scissors",computerSelection)
+});
+
+function playRound(playerSelection,computerSelection) {
+    let winner = checkWinner(playerSelection, computerSelection);
     winners.push(winner);
-    logRound(playerSelection, computerSelection, winner, round)
-
-}
-
-function playerChoice() {
-    let input = prompt("Type Rock, Paper, or Scissors")
-    while (input == null) {
-        input = prompt("Type Rock, Paper, or Scissors")
-    }
-    input = input.toLowerCase();
-    let check = validateInput(input);
-    while (check == false) {
-        input = prompt(
-            "Type Rock, Paper, or Scissors. Spelling needs to be exact, although capitalization does not matter!"
-        );
-        while (input == null) {
-            input = prompt("Type Rock, Paper, or Scissors")
-        }
-        input =input.toLowerCase();
-        check = validateInput(input);
-    }
-    return input;
-}
- 
+    logRound(playerSelection, computerSelection, winner)
+};
 function computerChoice() {
     return choices[Math.floor(Math.random() * choices.length)]
 }
@@ -67,12 +66,21 @@ function logWins(){
     console.log("Player Wins:", playerWins);
     console.log("Computer Wins:", computerWins);
     console.log("Ties:", ties);
-}
+};
 
-function logRound(playerChoice, computerChoice, winner, round) {
-    console.log("Round", round)
-    console.log("Player Choce:", playerChoice)
-    console.log("Computer Chose:", computerChoice)
-    console.log(winner,"Won the Round")
+function logRound(playerSelection, computerChoice, winner) {
+    console.log("Player Choice:", playerSelection)
+    console.log("Computer Choise:", computerChoice)
+    console.log(winner,"Wins The Round!")
     console.log("-------------------------------")
-}
+};
+
+const outcomeDiv = document.querySelector("#outcome"); 
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+    outcomeDiv.textContent = winners, "Wins The Round!";
+  });
+});
