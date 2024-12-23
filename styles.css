@@ -27,3 +27,18 @@
     align-items: center;
     padding: 40px
 }
+
+span.emoji {
+    font-size: 75px;
+    vertical-align: middle;
+    line-height: 2;
+    margin: 5px;
+  }
+
+#rock {
+    margin-right: 10px;
+}
+
+#scissors {
+    margin-left: 10px;
+}
